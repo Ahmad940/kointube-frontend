@@ -31,16 +31,62 @@ export default {
     '@nuxtjs/vuetify',
   ],
 
+  // loading bar
+  loading: {
+    color: '#fff',
+    throttle: 0,
+  },
+
+  // global router config
+  router: {
+    // Run the middleware/user-agent.js on every page
+    middleware: 'auth',
+  },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:5000',
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: { baseURL: process.env.BASE_URL },
+
+  // Auth modul configuration: https://auth.nuxtjs.org/
+  auth: {
+    // Options
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+        },
+        user: {
+          property: false,
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post' },
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/auth/profile', method: 'get' },
+        },
+      },
+    },
+    redirect: {
+      login: '/auth/login',
+      logout: '/',
+      callback: `/`,
+      home: '/',
+    },
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
