@@ -1,9 +1,12 @@
 <template>
-  <v-app-bar color='primary' app dark>
+  <v-app-bar color='primary' flat app dark>
     <v-app-bar-title>
-      <nuxt-link to='/' class='text-decoration-none white--text'>
-        {{ NAME }}
+      <nuxt-link to='/'>
+        <v-img src='1.png'   height='100' width='150' />
       </nuxt-link>
+<!--      <nuxt-link to='/' class='text-decoration-none white&#45;&#45;text'>-->
+<!--        KoinTube-->
+<!--      </nuxt-link>-->
     </v-app-bar-title>
     <v-spacer />
     <v-btn color='primary' depressed dark link to='/auth/login'>Sign In</v-btn>
@@ -13,11 +16,9 @@
 </template>
 
 <script>
-import appStore from '~/mixins/app-store'
 
 export default {
-  name: 'MidAppBarGuess',
-  mixins: [appStore]
+  name: 'AppBarGuess',
 }
 </script>
 

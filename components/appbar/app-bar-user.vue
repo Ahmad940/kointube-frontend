@@ -1,21 +1,29 @@
 <template>
-  <v-app-bar color='primary' app dark>
+  <v-app-bar color='primary' flat app dark>
     <v-app-bar-title>
-      <nuxt-link to='/' class='text-decoration-none white--text'>
-        KoinTube
+      <nuxt-link to='/'>
+        <v-img src='1.png'   height='100' width='150' />
       </nuxt-link>
+
+<!--      <nuxt-link to='/' class='text-decoration-none white&#45;&#45;text'>-->
+<!--        KoinTube-->
+<!--      </nuxt-link>-->
     </v-app-bar-title>
     <v-spacer />
-    <v-btn color='primary' depressed dark link to='/auth/login'>Sign In</v-btn>
-    <v-btn color='primary' depressed dark link to='/auth/signup'>Sign Up</v-btn>
+    <v-btn to="/auth/notification" dark depressed fab icon>
+      <v-icon>mdi-bell</v-icon>
+    </v-btn>
+    <ProfileMenu />
   </v-app-bar>
 
 </template>
 
 <script>
 
+import ProfileMenu from './profile_menu'
 export default {
-  name: 'AppBarGuess',
+  name: 'AppBarUser',
+  components: { ProfileMenu },
 }
 </script>
 

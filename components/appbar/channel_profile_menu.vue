@@ -1,7 +1,7 @@
 <template>
   <v-menu offset-y>
     <template #activator='{ on, attrs }'>
-      <v-list color="accent" class="white--text">
+      <v-list color="accent" class="darkgrey--text">
         <v-list-item dense v-bind="attrs" v-on="on">
 
           <v-avatar size="40" class="mr-2">
@@ -12,9 +12,9 @@
           </v-avatar>
 
           <!--          <v-list-item-title  class="white&#45;&#45;text">Ahmad Muhammad</v-list-item-title>-->
-          <v-list-item-title class="grey--text" v-text="$auth.user.username"></v-list-item-title>
+          <v-list-item-title class="darkgrey--text" v-text="$auth.user.username"></v-list-item-title>
           <v-list-item-icon>
-            <v-icon color="grey">mdi-menu-down</v-icon>
+            <v-icon color="black">mdi-menu-down</v-icon>
           </v-list-item-icon>
         </v-list-item>
       </v-list>
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  name: 'ProfileMenu',
+  name: 'ChannelProfileMenu',
   data: () => ({
     selectedItem: 1,
     items: [

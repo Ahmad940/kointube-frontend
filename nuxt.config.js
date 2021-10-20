@@ -3,7 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - kointube-frotend',
+    titleTemplate: '%s - kointube',
     title: 'kointube-frotend',
     meta: [
       { charset: 'utf-8' },
@@ -99,17 +99,21 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.purple,
-          accent: colors.grey.darken3,
+          accent: colors.grey.lighten4,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
         },
+        light: {
+          primary: colors.purple,
+          accent: colors.grey.lighten4,
+        }
       },
     },
   },

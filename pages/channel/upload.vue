@@ -1,10 +1,11 @@
 <template>
-$END$
+  <div>Upload Page</div>
 </template>
 
 <script>
 export default {
-name: "upload"
+  name: 'Upload',
+  layout: 'channel'
 }
 </script>
 

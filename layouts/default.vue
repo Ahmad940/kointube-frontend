@@ -1,9 +1,9 @@
 <template>
   <v-app dark>
-    <v-app-bar color="primary" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
-    </v-app-bar>
+
+    <AppBarUser v-if='$auth.loggedIn' />
+    <AppBarGuess v-else />
+
     <v-main>
       <v-container>
         <Nuxt />
@@ -17,7 +17,10 @@
 </template>
 
 <script>
+import AppBarGuess from '../components/appbar/app-bar-guess'
+import AppBarUser from '../components/appbar/app-bar-user'
 export default {
+  components: { AppBarUser, AppBarGuess },
   data() {
     return {
       title: 'KoinTube',
