@@ -66,7 +66,7 @@ export default {
   computed: {
     randomColor: () => {
       const colors = ['red', 'brown', 'orange', 'green', 'tomato', 'indigo']
-      const randIndex = Math.floor(Math.random() * colors.length - 1)
+      const randIndex = Math.floor(Math.random() * colors.length)
       return colors[randIndex]
 }
   }

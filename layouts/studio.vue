@@ -65,9 +65,9 @@ export default {
     drawer: null,
     miniVariant: false,
     items: [
-      { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/channel/dashboard' },
-      { title: 'Content', icon: 'mdi-card-account-details', to: '/channel/content' },
-      { title: 'Upload', icon: 'mdi-account-details', to: '/channel/upload' },
+      { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/studio/dashboard' },
+      { title: 'Content', icon: 'mdi-card-account-details', to: '/studio/content' },
+      { title: 'Upload', icon: 'mdi-account-details', to: '/studio/upload' },
     ]
   }),
   computed: {}

@@ -1,14 +1,13 @@
 <template>
   <div>
-    <p>Channel {{$route.params.id}}</p>
+    Content Page
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ChannelHome',
-  layout: 'channel'
-
+  name: 'ContentIndex',
+  layout: 'studio'
 }
 </script>
 

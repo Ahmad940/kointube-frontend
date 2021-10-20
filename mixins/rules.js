@@ -9,6 +9,9 @@ export default {
       emailRule: (v) => /.+@.+\..+/.test(v) || 'Invalid e-mail',
       passwordMatch: (value, password) =>
         value === password || 'Password does not match',
+      uploadThumbnailRule: [
+        value => !value || value.size < 2000000 || 'Thumbnail size should be less than 2 MB!',
+      ],
     }
   },
 }
