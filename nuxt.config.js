@@ -104,7 +104,7 @@ export default {
         dark: {
           primary: colors.purple,
           accent: colors.grey.lighten4,
-          secondary: colors.amber.darken3,
+          secondary: '#FB740E',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -112,6 +112,7 @@ export default {
         },
         light: {
           primary: colors.purple,
+          secondary: '#FB740E',
           accent: colors.grey.lighten4,
         }
       },

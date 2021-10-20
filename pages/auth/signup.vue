@@ -106,7 +106,7 @@
 
             <v-btn
               rounded
-              color='primary'
+              color='secondary'
               block
               :loading='loading'
               :disabled='!valid'

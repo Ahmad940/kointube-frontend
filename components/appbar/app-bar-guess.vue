@@ -2,7 +2,7 @@
   <v-app-bar color='primary' flat app dark>
     <v-app-bar-title>
       <nuxt-link to='/'>
-        <v-img src='1.png'   height='100' width='150' />
+        <v-img src='/logolight.png'   height='100' width='150' />
       </nuxt-link>
 <!--      <nuxt-link to='/' class='text-decoration-none white&#45;&#45;text'>-->
 <!--        KoinTube-->

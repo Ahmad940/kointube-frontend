@@ -4,11 +4,8 @@
       <v-list color="accent" class="darkgrey--text">
         <v-list-item dense v-bind="attrs" v-on="on">
 
-          <v-avatar size="40" class="mr-2">
-            <img
-              src="https://cdn.vuetifyjs.com/images/john.jpg"
-              alt="John"
-            >
+          <v-avatar size="30" class="mr-2 white--text" :color='randomColor'>
+            {{ $auth.user.username.charAt(0).toUpperCase() }}
           </v-avatar>
 
           <!--          <v-list-item-title  class="white&#45;&#45;text">Ahmad Muhammad</v-list-item-title>-->
@@ -64,9 +61,15 @@ export default {
         title: 'Sign Out',
         to: '/auth/logout'
       }
-
     ]
-  })
+  }),
+  computed: {
+    randomColor: () => {
+      const colors = ['red', 'brown', 'orange', 'green', 'tomato', 'indigo']
+      const randIndex = Math.floor(Math.random() * colors.length - 1)
+      return colors[randIndex]
+    }
+  }
 }
 </script>
 
