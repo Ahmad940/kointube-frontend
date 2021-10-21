@@ -44,7 +44,7 @@ export default {
   },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:5000/api',
+    BASE_URL: process.env.BASE_URL || 'http://localhost:5000/api',
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -58,7 +58,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.baseUrl  || 'http://localhost:5000/api',
+    baseURL: process.env.BASE_URL  || 'http://localhost:5000/api',
   },
 
   // Auth modul configuration: https://auth.nuxtjs.org/
