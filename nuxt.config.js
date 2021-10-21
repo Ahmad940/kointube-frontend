@@ -1,17 +1,23 @@
 import colors from 'vuetify/es5/util/colors'
+import pkg from './package.json'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - kointube',
-    title: 'kointube-frotend',
+    title: 'KoinTube',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'description', name: 'description', content: pkg.description },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -28,23 +34,23 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
+    '@nuxtjs/vuetify'
   ],
 
   // loading bar
   loading: {
     color: '#fff',
-    throttle: 0,
+    throttle: 0
   },
 
   // global router config
   router: {
     // Run the middleware/user-agent.js on every page
-    middleware: 'auth',
+    middleware: 'auth'
   },
 
   env: {
-    BASE_URL: process.env.BASE_URL || 'http://localhost:5000/api',
+    BASE_URL: process.env.BASE_URL || 'http://localhost:5000/api'
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -53,12 +59,12 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/auth-next',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.BASE_URL  || 'http://localhost:5000/api',
+    baseURL: process.env.BASE_URL || 'http://localhost:5000/api'
   },
 
   // Auth modul configuration: https://auth.nuxtjs.org/
@@ -69,32 +75,32 @@ export default {
         token: {
           property: 'token',
           required: true,
-          type: 'Bearer',
+          type: 'Bearer'
         },
         user: {
-          property: false,
+          property: false
           // autoFetch: true
         },
         endpoints: {
           login: { url: '/auth/login', method: 'post' },
           logout: { url: '/auth/logout', method: 'post' },
-          user: { url: '/auth/profile', method: 'get' },
-        },
-      },
+          user: { url: '/auth/profile', method: 'get' }
+        }
+      }
     },
     redirect: {
       login: '/auth/login',
       logout: '/',
       callback: `/`,
-      home: '/',
-    },
+      home: '/'
+    }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en',
-    },
+      lang: 'en'
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -110,20 +116,20 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          success: colors.green.accent3
         },
         light: {
           primary: colors.purple,
           secondary: '#FB740E',
-          accent: colors.grey.lighten4,
+          accent: colors.grey.lighten4
         }
-      },
-    },
+      }
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ['lodash-es'],
+    transpile: ['lodash-es']
     // Other build options
-  },
+  }
 }

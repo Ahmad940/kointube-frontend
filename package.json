@@ -1,5 +1,6 @@
 {
-  "name": "kointube-frotend",
+  "name": "kointube",
+  "description": "KoinTube is an innovative local video streaming platform",
   "version": "1.0.0",
   "private": true,
   "scripts": {
