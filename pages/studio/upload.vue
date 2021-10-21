@@ -16,27 +16,51 @@
                         outlined />
         </v-col>
 
+<!--        upload image col-->
         <v-col cols='12' md='4'>
           <p class=''>Thumbnail</p>
-          <v-img
+          <v-card
             v-if='formData.thumbnailUrl'
-            lazy-src='/minilogo.png'
-            :src='formData.thumbnailUrl'
             height='250'
-            width='250'>
-            <template #placeholder>
-              <v-row
-                class="fill-height ma-0"
-                align="center"
-                justify="center"
+            width='250'
+            @mouseenter='thumbnailOverlay = true'
+            @mouseleave='thumbnailOverlay = false'>
+            <v-overlay
+              absolute
+              :value='thumbnailOverlay'
+            >
+              <v-btn
+                class="mx-2"
+                fab
+                dark
+                small
+                color="primary"
+                @click='closeThumbnailOverlay'
               >
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                ></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
+                <v-icon dark color='white'>
+                  mdi-close
+                </v-icon>
+              </v-btn>
+            </v-overlay>
+            <v-img
+              lazy-src='/minilogo.png'
+              :src='formData.thumbnailUrl'
+              height='250'
+              width='250'>
+              <template #placeholder>
+                <v-row
+                  class='fill-height ma-0'
+                  align='center'
+                  justify='center'
+                >
+                  <v-progress-circular
+                    indeterminate
+                    color='grey lighten-5'
+                  ></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
+          </v-card>
           <v-dialog
             v-else
             v-model='thumbnailDialog'
@@ -96,9 +120,40 @@
           </v-dialog>
         </v-col>
 
+<!--        upload video col-->
         <v-col cols='12' md='4'>
           <p class=''>Video</p>
+          <v-card
+            v-if='formData.videoUrl'
+            height='250'
+            width='250'
+            @mouseenter='videoOverlay = true'
+            @mouseleave='videoOverlay = false'>
+            <v-overlay
+              absolute
+              :value='videoOverlay'
+            >
+              <v-btn
+                class="mx-2"
+                fab
+                dark
+                small
+                color="primary"
+                @click='closeVideoOverlay'
+              >
+                <v-icon dark color='white'>
+                  mdi-close
+                </v-icon>
+              </v-btn>
+            </v-overlay>
+
+            <video controls width='250' height='250'>
+              <source type='video/mp4' :src='formData.videoUrl' />
+            </video>
+
+          </v-card>
           <v-dialog
+            v-else
             v-model='videoDialog'
             persistent
             max-width='500'
@@ -108,7 +163,9 @@
                 class='thumb'
                 v-bind='attrs'
                 v-on='on'>
-                <p>Upload Video</p>
+                <p>
+                  Upload Video
+                </p>
               </div>
             </template>
             <v-card>
@@ -189,6 +246,8 @@ export default {
   layout: 'studio',
   data() {
     return {
+      thumbnailOverlay: false,
+      videoOverlay: false,
       thumbnailUploadProgress: 0,
       videoUploadProgress: 0,
       loading: false,
@@ -208,6 +267,14 @@ export default {
     title: 'Upload Video'
   },
   methods: {
+    closeThumbnailOverlay() {
+      this.formData.thumbnailUrl = ''
+      this.thumbnailOverlay = false
+    },
+    closeVideoOverlay() {
+      this.formData.videoUrl = ''
+      this.videoOverlay = false
+    },
     closeThumbnailDialog() {
       this.thumbnailUploadProgress = 0
       this.thumbnail = null

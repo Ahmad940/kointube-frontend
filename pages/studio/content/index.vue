@@ -90,8 +90,8 @@ export default {
     },
     deleteItem(item) {
       Confirm.show(
-        'Are you sure want to delete this item',
-        'This action cannot be undone!',
+        'Delete Item',
+        'Are you sure you want to delete this item\nThis action cannot be undone!',
         'Yes',
         'No',
         async () => {

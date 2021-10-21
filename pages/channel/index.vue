@@ -1,6 +1,6 @@
 <template>
   <div>
-    THis Page is to display list of available channels that has uploaded atleast one video
+    This Page is to display list of available channels that has uploaded atleast one video
   </div>
 </template>
 
