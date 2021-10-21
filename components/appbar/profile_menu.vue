@@ -9,7 +9,9 @@
           </v-avatar>
 
           <!--          <v-list-item-title  class="white&#45;&#45;text">Ahmad Muhammad</v-list-item-title>-->
-          <v-list-item-title class="white--text" v-text="$auth.user.username"></v-list-item-title>
+          <v-list-item-title class="white--text">
+            {{ $auth.user.username | startCase }}
+          </v-list-item-title>
           <v-list-item-icon>
             <v-icon color="white">mdi-menu-down</v-icon>
           </v-list-item-icon>
@@ -41,8 +43,11 @@
 </template>
 
 <script>
+import filterMixin from '~/mixins/filter-mixin'
+
 export default {
   name: 'ProfileMenu',
+  mixins: [filterMixin],
   data: () => ({
     selectedItem: 1,
     items: [
