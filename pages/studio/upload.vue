@@ -9,14 +9,14 @@
       <v-row>
         <v-col cols='12'>
           <v-text-field v-model='formData.title'
-                        :rules='[fieldRequired]'
+                        :rules='[fieldRequired, titleMin]'
                         label='Title'
                         placeholder='Enter Title...'
                         dense
                         outlined />
         </v-col>
 
-<!--        upload image col-->
+        <!--        upload image col-->
         <v-col cols='12' md='4'>
           <p class=''>Thumbnail</p>
           <v-card
@@ -30,11 +30,11 @@
               :value='thumbnailOverlay'
             >
               <v-btn
-                class="mx-2"
+                class='mx-2'
                 fab
                 dark
                 small
-                color="primary"
+                color='primary'
                 @click='closeThumbnailOverlay'
               >
                 <v-icon dark color='white'>
@@ -80,14 +80,17 @@
                 Upload Thumbnail
               </v-card-title>
               <v-card-text>
-                <v-file-input
-                  v-model='thumbnail'
-                  :rules='uploadThumbnailRule'
-                  accept='image/png, image/jpeg, image/bmp'
-                  placeholder='Select Picture'
-                  prepend-icon='mdi-camera'
-                  label='Upload Thumbnail'
-                ></v-file-input>
+                <v-form ref='thumbnailForm'>
+                  <v-file-input
+                    v-model='thumbnail'
+                    :rules='[fieldRequired, thumbMaxSiz]'
+                    accept='image/png, image/jpeg, image/bmp'
+                    placeholder='Select Picture'
+                    prepend-icon='mdi-camera'
+                    label='Upload Thumbnail'
+                    show-size
+                  ></v-file-input>
+                </v-form>
 
                 <v-progress-linear
                   v-show='thumbnailUploadProgress !== 0'
@@ -120,7 +123,7 @@
           </v-dialog>
         </v-col>
 
-<!--        upload video col-->
+        <!--        upload video col-->
         <v-col cols='12' md='4'>
           <p class=''>Video</p>
           <v-card
@@ -134,11 +137,11 @@
               :value='videoOverlay'
             >
               <v-btn
-                class="mx-2"
+                class='mx-2'
                 fab
                 dark
                 small
-                color="primary"
+                color='primary'
                 @click='closeVideoOverlay'
               >
                 <v-icon dark color='white'>
@@ -173,13 +176,17 @@
                 Upload Video
               </v-card-title>
               <v-card-text>
-                <v-file-input
-                  v-model='video'
-                  accept='video/mp4,video/x-m4v,video/*'
-                  placeholder='Select video'
-                  prepend-icon='mdi-video'
-                  label='Upload Video'
-                ></v-file-input>
+                <v-form ref='videoForm'>
+                  <v-file-input
+                    v-model='video'
+                    show-size
+                    :rules='[fieldRequired]'
+                    accept='video/mp4,video/x-m4v,video/*'
+                    placeholder='Select video'
+                    prepend-icon='mdi-video'
+                    label='Upload Video'
+                  ></v-file-input>
+                </v-form>
 
                 <v-progress-linear
                   v-show='videoUploadProgress !== 0'
@@ -189,7 +196,6 @@
                 >
                   <strong class='white--text'>{{ Math.ceil(videoUploadProgress) }}%</strong>
                 </v-progress-linear>
-
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -286,6 +292,8 @@ export default {
       this.videoDialog = false
     },
     async uploadThumbnailDialogHandler() {
+      if (!this.$refs.thumbnailForm.validate()) return
+
       const formData = new FormData()
       formData.append('image', this.thumbnail)
       const headers = { 'Content-Type': 'multipart/form-data' }
@@ -305,6 +313,8 @@ export default {
       this.closeThumbnailDialog()
     },
     async uploadVideoDialogHandler() {
+      if (!this.$refs.videoForm.validate()) return
+
       const formData = new FormData()
       formData.append('video', this.video)
       const headers = { 'Content-Type': 'multipart/form-data' }
