@@ -120,7 +120,7 @@
                   v-model='video'
                   accept='video/mp4,video/x-m4v,video/*'
                   placeholder='Select video'
-                  prepend-icon='mdi-camera-image'
+                  prepend-icon='mdi-video'
                   label='Upload Video'
                 ></v-file-input>
 
@@ -157,8 +157,8 @@
         </v-col>
 
 
-        <v-col cols='12' class='mt-5'>
-          <v-btn width='49%' color='secondary'>
+        <v-col cols='12' class='mt-7'>
+          <v-btn width='49%' color='secondary' @click='$router.push("content")'>
             <v-icon dark left>mdi-close</v-icon>
             Cancel
           </v-btn>

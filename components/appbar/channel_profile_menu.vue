@@ -47,14 +47,14 @@ export default {
     selectedItem: 1,
     items: [
       {
-        icon: 'mdi-account',
-        title: 'Profile',
-        to: '/app/profile'
+        icon: 'mdi-video-plus',
+        title: 'Channel',
+        to: '/studio/dashboard'
       },
       {
         icon: 'mdi-cog',
         title: 'Settings',
-        to: '/app/settings'
+        to: '/studio/settings'
       },
       {
         icon: 'mdi-logout',

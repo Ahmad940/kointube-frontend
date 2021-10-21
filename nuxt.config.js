@@ -58,9 +58,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.BASE_URL,
-    proxyHeaders: false,
-    credentials: false,
+    baseURL: process.env.BASE_URL  || 'http://localhost:5000',
   },
 
   // Auth modul configuration: https://auth.nuxtjs.org/
