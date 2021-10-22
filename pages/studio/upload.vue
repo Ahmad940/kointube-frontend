@@ -343,9 +343,8 @@ export default {
         this.loading = true
 
         await this.$axios.$post('/video', this.formData)
-        await this.$router.push('content')
-
         this.loading = false
+        await this.$router.push('content')
       } catch ({ response }) {
         // eslint-disable-next-line no-console
         console.log(response)

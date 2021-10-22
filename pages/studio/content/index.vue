@@ -85,8 +85,7 @@ export default {
   },
   methods: {
     editItem(item) {
-      // eslint-disable-next-line no-console
-      console.log('Item', item)
+      this.$router.push(`edit/${item.id}`)
     },
     deleteItem(item) {
       Confirm.show(

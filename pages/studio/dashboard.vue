@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-container>
     <KDashboardCards />
-  </div>
+  </v-container>
 </template>
 
 <script>
