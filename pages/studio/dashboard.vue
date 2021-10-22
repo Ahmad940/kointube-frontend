@@ -1,12 +1,15 @@
 <template>
   <div>
-    <p>Channel {{$route.params.id}}</p>
+    <KDashboardCards />
   </div>
 </template>
 
 <script>
+import KDashboardCards from '../../components/card/K-Dashboard-Cards'
+
 export default {
   name: 'ChannelHome',
+  components: { KDashboardCards },
   layout: 'studio'
 
 }
