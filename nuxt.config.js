@@ -11,6 +11,11 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description },
       { name: 'format-detection', content: 'telephone=no' },
+      { property: 'og:url', content: 'https://kointube.herokuapp.com' },
+      { property: 'og:type', content: 'streaming' },
+      { property: 'og:title', content: 'Kointube' },
+      { property: 'og:description', content: pkg.description },
+      { property: 'og:image', content: '/logolight.png' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
