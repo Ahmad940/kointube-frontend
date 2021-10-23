@@ -1,30 +1,27 @@
 <template>
-  <div>
-    <v-row>
-      <v-col v-for='video in videos' :key='video.id' cols='12' sm='6' md='4'>
-        <v-card height='445' width='100%' :to='`/watch/${video.id}`'>
+  <div class="pt-10 px-4">
+    <h2>{{ videos[0].author.username | startCase }} Channel</h2>
+    <v-row class="pt-10">
+      <v-col v-for="video in videos" :key="video.id" cols="12" sm="6" md="4">
+        <v-card height="445" width="100%" :to="`/watch/${video.id}`">
           <v-card-title>
-            <v-avatar size='30' class='mr-2 white--text' :color='randomColor'>
+            <v-avatar size="30" class="mr-2 white--text" :color="randomColor">
               {{ video.author.username.charAt(0).toUpperCase() }}
             </v-avatar>
-            <span class='text-h6 font-weight-light'> {{ video.author.username | startCase }} </span>
+            <span class="text-h6 font-weight-light">
+              {{ video.author.username | startCase }}
+            </span>
           </v-card-title>
-          <v-card-subtitle>{{ $dayjs(video.createdAt).fromNow() }}</v-card-subtitle>
+          <v-card-subtitle>{{
+            $dayjs(video.createdAt).fromNow()
+          }}</v-card-subtitle>
 
-          <v-img
-            height='250'
-            :src='video.thumbnailUrl'
-            :alt='video.title'
-          >
+          <v-img height="250" :src="video.thumbnailUrl" :alt="video.title">
             <template #placeholder>
-              <v-row
-                class='fill-height ma-0'
-                align='center'
-                justify='center'
-              >
+              <v-row class="fill-height ma-0" align="center" justify="center">
                 <v-progress-circular
                   indeterminate
-                  color='grey lighten-5'
+                  color="grey lighten-5"
                 ></v-progress-circular>
               </v-row>
             </template>
@@ -32,7 +29,7 @@
 
           <!--          <v-card-text>-->
           <!--          </v-card-text>-->
-          <p class='title pa-2 font-weight-light'>{{ video.title }}</p>
+          <p class="title pa-2 font-weight-light">{{ video.title }}</p>
 
           <v-card-actions>
             <span><v-icon>mdi-eye</v-icon> 23233 views</span>
@@ -43,7 +40,7 @@
   </div>
 </template>
 <script>
-import {truncate} from 'lodash-es'
+import { truncate } from 'lodash-es'
 import filterMixin from '~/mixins/filter-mixin'
 
 export default {
@@ -55,18 +52,26 @@ export default {
   },
   computed: {
     randomColor: () => {
-      const colors = ['red', 'brown', 'orange', 'green', 'tomato', 'indigo', 'purple']
+      const colors = [
+        'red',
+        'brown',
+        'orange',
+        'green',
+        'tomato',
+        'indigo',
+        'purple',
+      ]
       const randIndex = Math.floor(Math.random() * colors.length)
       return colors[randIndex]
     },
   },
   methods: {
     truncateText(text) {
-        return truncate(text, {
-          'length': 26,
-          'separator': ' '
-        });
+      return truncate(text, {
+        length: 26,
+        separator: ' ',
+      })
     },
-  }
+  },
 }
 </script>
