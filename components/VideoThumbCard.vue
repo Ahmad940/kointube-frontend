@@ -32,7 +32,7 @@
     <p class='title pa-2 font-weight-light'>{{ video.title }}</p>
 
     <v-card-actions>
-      <span><v-icon>mdi-eye</v-icon> 23233 views</span>
+      <span><v-icon>mdi-eye</v-icon> {{ Math.floor(Math.random() * 100) }} views</span>
     </v-card-actions>
   </v-card>
 </template>
