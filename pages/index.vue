@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-container>
     <p>Hello From Hom Page</p>
-  </div>
+  </v-container>
 </template>
 
 <script>

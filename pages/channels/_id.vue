@@ -1,20 +1,20 @@
 <template>
   <div>
     <v-row>
-      <v-col v-for="video in videos" :key="video.id" cols="12" sm="6" md="4">
-        <v-card elevation="5" max-width="300" :to='`/watch/${video.id}`'>
+      <v-col v-for='video in videos' :key='video.id' cols='12' sm='6' md='4'>
+        <v-card height='445' width='100%' :to='`/watch/${video.id}`'>
           <v-card-title>
             <v-avatar size='30' class='mr-2 white--text' :color='randomColor'>
               {{ video.author.username.charAt(0).toUpperCase() }}
             </v-avatar>
-            <span class='text-h6 font-weight-light'> {{ video.author.username }} </span>
+            <span class='text-h6 font-weight-light'> {{ video.author.username | startCase }} </span>
           </v-card-title>
           <v-card-subtitle>{{ $dayjs(video.createdAt).fromNow() }}</v-card-subtitle>
 
           <v-img
-            height="250"
-            :src="video.thumbnailUrl"
-            :alt="video.title"
+            height='250'
+            :src='video.thumbnailUrl'
+            :alt='video.title'
           >
             <template #placeholder>
               <v-row
@@ -30,16 +30,24 @@
             </template>
           </v-img>
 
-<!--          <v-card-text>-->
-<!--          </v-card-text>-->
-          <v-card-title>{{ video.title }}</v-card-title>
+          <!--          <v-card-text>-->
+          <!--          </v-card-text>-->
+          <p class='title pa-2 font-weight-light'>{{ video.title }}</p>
+
+          <v-card-actions>
+            <span><v-icon>mdi-eye</v-icon> 23233 views</span>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
   </div>
 </template>
 <script>
+import {truncate} from 'lodash-es'
+import filterMixin from '~/mixins/filter-mixin'
+
 export default {
+  mixins: [filterMixin],
   async asyncData({ params, $axios }) {
     const videos = await $axios.$get(`video/channel/${params.id}`)
 
@@ -50,6 +58,14 @@ export default {
       const colors = ['red', 'brown', 'orange', 'green', 'tomato', 'indigo', 'purple']
       const randIndex = Math.floor(Math.random() * colors.length)
       return colors[randIndex]
+    },
+  },
+  methods: {
+    truncateText(text) {
+        return truncate(text, {
+          'length': 26,
+          'separator': ' '
+        });
     },
   }
 }

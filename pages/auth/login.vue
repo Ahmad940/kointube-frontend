@@ -104,6 +104,7 @@ export default {
   name: 'Login',
   auth: 'guest',
   mixins: [rules],
+  layout: 'auth',
   data() {
     return {
       valid: false,

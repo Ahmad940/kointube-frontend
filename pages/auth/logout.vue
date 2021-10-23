@@ -8,6 +8,7 @@ import { Notify } from 'notiflix'
 
 export default {
   name: 'Logout',
+  layout: 'auth',
   mounted() {
     this.$auth.logout()
     Notify.success('Signed out successfully', {

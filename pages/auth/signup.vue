@@ -150,6 +150,7 @@ export default {
   name: 'SignUp',
   auth: 'guest',
   mixins: [rules],
+  layout: 'auth',
   data() {
     return {
       valid: false,

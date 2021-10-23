@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-10">
+  <div class="pt-2">
     <h3>Channels List</h3>
     <!-- <v-divider /> -->
     <v-row class="pt-10">
@@ -38,7 +38,7 @@
             <v-avatar size='30' class='mr-2 white--text' :color='randomColor'>
               {{ channel.username.charAt(0).toUpperCase() }}
             </v-avatar>
-            <span class='text-h6 font-weight-light'> {{ channel.username }} </span>
+            <span class='text-h6 font-weight-light'> {{ channel.username | startCase }} </span>
           </v-card-title>
         </v-card>
       </v-col>
@@ -47,8 +47,11 @@
 </template>
 
 <script>
+import filterMixin from '~/mixins/filter-mixin'
+
 export default {
   name: 'ChannelIndex',
+  mixins: [filterMixin],
   async asyncData({ $axios }) {
     const channels = await $axios.$get(`users/channel`)
 

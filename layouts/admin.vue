@@ -67,8 +67,8 @@ export default {
     items: [
       { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/admin/dashboard' },
       { title: 'Users', icon: 'mdi-card-account-details', to: '/admin/users' },
-      { title: 'Videos', icon: 'mdi-account-details', to: '/admin/videos' },
-      { title: 'Reports', icon: 'mdi-account-details', to: '/admin/reports' },
+      { title: 'Videos', icon: 'mdi-video', to: '/admin/videos' },
+      { title: 'Reports', icon: 'mdi-flag', to: '/admin/reports' },
     ]
   }),
   computed: {}

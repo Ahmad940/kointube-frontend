@@ -1,7 +1,7 @@
 <template>
   <v-menu offset-y>
     <template #activator='{ on, attrs }'>
-      <v-list color="primary">
+      <v-list color="accent">
         <v-list-item dense v-bind="attrs" v-on="on">
 
           <v-avatar size="30" class="mr-2 white--text" :color='randomColor'>
@@ -9,11 +9,11 @@
           </v-avatar>
 
           <!--          <v-list-item-title  class="white&#45;&#45;text">Ahmad Muhammad</v-list-item-title>-->
-          <v-list-item-title class="white--text">
+          <v-list-item-title class="darkgrey--text">
             {{ $auth.user.username | startCase }}
           </v-list-item-title>
           <v-list-item-icon>
-            <v-icon color="white">mdi-menu-down</v-icon>
+            <v-icon color="darkgrey">mdi-menu-down</v-icon>
           </v-list-item-icon>
         </v-list-item>
       </v-list>
