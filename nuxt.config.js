@@ -75,7 +75,14 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/auth-next',
+    '@nuxtjs/dayjs'
   ],
+
+  dayjs: {
+    locales: ['en'],
+    defaultLocale: 'en',
+    plugins: ['relativeTime', 'advancedFormat'],
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

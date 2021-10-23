@@ -1,5 +1,5 @@
 <template>
-  <v-div>
+  <div>
     <v-row>
       <v-col cols='12' md='8'>
         <v-card>
@@ -9,8 +9,10 @@
             </v-avatar>
             <span class='text-h6 font-weight-light'> {{ video.author.username }} </span>
             <v-spacer />
-            <v-btn color='secondary' small depressed @click='subscribe'>Subscribe</v-btn>
+            <v-btn color='secondary' small depressed @click='dev'>Subscribe</v-btn>
           </v-card-title>
+
+          <v-card-subtitle>{{ $dayjs(video.createdAt).fromNow() }}</v-card-subtitle>
 
           <video controls width='100%'>
             <source :src='video.videoUrl' type='video/mp4' />
@@ -22,21 +24,21 @@
 
           <v-card-actions class='my-0'>
             <v-spacer />
-            <v-btn icon>
+            <v-btn icon @click='dev'>
               <v-icon>mdi-thumb-up</v-icon>
             </v-btn>
-            <v-btn icon>
+            <v-btn icon @click='dev'>
               <v-icon>mdi-thumb-down</v-icon>
             </v-btn>
-            <v-btn depressed text elevation='=0'>
+            <v-btn depressed text elevation='=0' @click='dev'>
               <v-icon left>mdi-cloud-upload</v-icon>
               Download
             </v-btn>
-            <v-btn text depressed elevation='=0'>
+            <v-btn text depressed elevation='=0' @click='dev'>
               <v-icon left>mdi-share</v-icon>
               Share
             </v-btn>
-            <v-btn depressed elevation='=0' text>
+            <v-btn depressed elevation='=0' text @click='dev'>
               <v-icon left>mdi-flag</v-icon>
               Report
             </v-btn>
@@ -48,7 +50,7 @@
         <p>Hello to ma space</p>
       </v-col>
     </v-row>
-  </v-div>
+  </div>
 </template>
 
 <script>
@@ -76,10 +78,17 @@ export default {
       const colors = ['red', 'brown', 'orange', 'green', 'tomato', 'indigo', 'purple']
       const randIndex = Math.floor(Math.random() * colors.length)
       return colors[randIndex]
+    },
+    formatedDate() {
+      // eslint-disable-next-line no-console
+      console.log("dayjs", this.$dayjs)
+      return  this.$dayjs().format('YYYY/MM/DD')
+
     }
+
   },
   methods: {
-    subscribe() {
+    dev() {
       Report.success('Coming soon...', 'This feature is under development...', 'Ok')
     }
   }
