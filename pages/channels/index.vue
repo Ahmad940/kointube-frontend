@@ -14,7 +14,7 @@
           elevation="1"
           nuxt
           width='100%'
-          :to="'/channel/' + channel.id"
+          :to="'/channels/' + channel.id"
         >
           <v-img
             height="250"
