@@ -6,7 +6,7 @@
         <v-icon color='darkgrey'>mdi-{{ miniVariant ? 'chevron-right' : 'chevron-left' }}</v-icon>
       </v-btn>
       <v-app-bar-nav-icon class='darkgrey--text mr-3' @click='drawer = !drawer' />
-      <nuxt-link to='/channel/dashboard'>
+      <nuxt-link to='/studio/dashboard'>
         <v-img src='/logodark.png' height='80' width='150' />
       </nuxt-link>
 <!--      <nuxt-link to='/app' class='text-decoration-none white&#45;&#45;text'>-->

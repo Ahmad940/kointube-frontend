@@ -38,10 +38,6 @@
               <v-icon left>mdi-share</v-icon>
               Share
             </v-btn>
-            <v-btn depressed elevation='=0' text @click='dev'>
-              <v-icon left>mdi-flag</v-icon>
-              Report
-            </v-btn>
           </v-card-actions>
 
         </v-card>
