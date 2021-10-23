@@ -12,15 +12,28 @@
       >
         <v-card
           elevation="1"
-          max-width="300"
           nuxt
+          width='100%'
           :to="'/channel/' + channel.id"
         >
           <v-img
             height="250"
             src="/channellogo.jpg"
             :alt="channel.title"
-          ></v-img>
+          >
+            <template #placeholder>
+              <v-row
+                class='fill-height ma-0'
+                align='center'
+                justify='center'
+              >
+                <v-progress-circular
+                  indeterminate
+                  color='grey lighten-5'
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
           <v-card-title>
             <v-avatar size='30' class='mr-2 white--text' :color='randomColor'>
               {{ channel.username.charAt(0).toUpperCase() }}

@@ -14,7 +14,7 @@
 
           <v-card-subtitle>{{ $dayjs(video.createdAt).fromNow() }}</v-card-subtitle>
 
-          <video controls width='100%'>
+          <video controls width='100%' height='320'>
             <source :src='video.videoUrl' type='video/mp4' />
           </video>
 
@@ -47,7 +47,7 @@
         </v-card>
       </v-col>
       <v-col cols='12' md='4'>
-        <p>Hello to ma space</p>
+        <p>Suggested videos section</p>
       </v-col>
     </v-row>
   </div>
