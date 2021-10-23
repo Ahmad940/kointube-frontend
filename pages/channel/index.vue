@@ -18,10 +18,15 @@
         >
           <v-img
             height="250"
-            src=" https://via.placeholder.com/468x60?text=Channel+Poster"
+            src="/channellogo.jpg"
             :alt="channel.title"
           ></v-img>
-          <v-card-title>{{ channel.username }}</v-card-title>
+          <v-card-title>
+            <v-avatar size='30' class='mr-2 white--text' :color='randomColor'>
+              {{ channel.username.charAt(0).toUpperCase() }}
+            </v-avatar>
+            <span class='text-h6 font-weight-light'> {{ channel.username }} </span>
+          </v-card-title>
         </v-card>
       </v-col>
     </v-row>
@@ -36,6 +41,13 @@ export default {
 
     return { channels }
   },
+  computed: {
+    randomColor: () => {
+      const colors = ['red', 'brown', 'orange', 'green', 'tomato', 'indigo', 'purple']
+      const randIndex = Math.floor(Math.random() * colors.length)
+      return colors[randIndex]
+    },
+  }
 }
 </script>
 
