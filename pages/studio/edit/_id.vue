@@ -179,6 +179,9 @@ export default {
       }
     }
   },
+  head: {
+    title: 'Edit Video',
+  },
   methods: {
     closeThumbnailOverlay() {
       this.formData.thumbnailUrl = ''

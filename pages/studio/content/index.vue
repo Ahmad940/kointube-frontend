@@ -83,6 +83,9 @@ export default {
       Report.failure('Error', response.data.message, 'Ok')
     }
   },
+  head: {
+    title: 'Content',
+  },
   methods: {
     editItem(item) {
       this.$router.push(`edit/${item.id}`)

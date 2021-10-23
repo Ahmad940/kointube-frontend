@@ -58,16 +58,17 @@
 
 import ChannelProfileMenu from '../components/appbar/channel_profile_menu'
 export default {
-  name: 'StudioLayout',
+  name: 'AdminLayout',
   components: { ChannelProfileMenu },
   data: () => ({
     title: 'KoinTube',
     drawer: null,
     miniVariant: false,
     items: [
-      { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/studio/dashboard' },
-      { title: 'Content', icon: 'mdi-card-account-details', to: '/studio/content' },
-      { title: 'Upload', icon: 'mdi-account-details', to: '/studio/upload' },
+      { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/admin/dashboard' },
+      { title: 'Users', icon: 'mdi-card-account-details', to: '/admin/users' },
+      { title: 'Videos', icon: 'mdi-account-details', to: '/admin/videos' },
+      { title: 'Reports', icon: 'mdi-account-details', to: '/admin/reports' },
     ]
   }),
   computed: {}

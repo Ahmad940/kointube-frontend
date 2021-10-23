@@ -52,9 +52,9 @@ export default {
     selectedItem: 1,
     items: [
       {
-        icon: 'mdi-video-plus',
-        title: 'Channel',
-        to: '/studio/dashboard'
+        icon: 'mdi-home',
+        title: 'Home',
+        to: '/'
       },
       {
         icon: 'mdi-cog',
