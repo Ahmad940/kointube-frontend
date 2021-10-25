@@ -1,27 +1,21 @@
 <template>
-  <v-card height='445' width='100%' :to='`/watch/${video.id}`'>
+  <v-card height="445" width="100%" :to="`/watch/${video.id}`">
     <v-card-title>
-      <v-avatar size='30' class='mr-2 white--text' :color='randomColor'>
+      <v-avatar size="30" class="mr-2 white--text" :color="randomColor">
         {{ video.author.username.charAt(0).toUpperCase() }}
       </v-avatar>
-      <span class='text-h6 font-weight-light'> {{ video.author.username | startCase }} </span>
+      <span class="text-h6 font-weight-light">
+        {{ video.author.username | startCase }}
+      </span>
     </v-card-title>
     <v-card-subtitle>{{ $dayjs(video.createdAt).fromNow() }}</v-card-subtitle>
 
-    <v-img
-      height='250'
-      :src='video.thumbnailUrl'
-      :alt='video.title'
-    >
+    <v-img height="250" :src="video.thumbnailUrl" :alt="video.title">
       <template #placeholder>
-        <v-row
-          class='fill-height ma-0'
-          align='center'
-          justify='center'
-        >
+        <v-row class="fill-height ma-0" align="center" justify="center">
           <v-progress-circular
             indeterminate
-            color='grey lighten-5'
+            color="grey lighten-5"
           ></v-progress-circular>
         </v-row>
       </template>
@@ -29,16 +23,19 @@
 
     <!--          <v-card-text>-->
     <!--          </v-card-text>-->
-    <p class='title pa-2 font-weight-light'>{{ video.title }}</p>
+    <p class="title pa-2 font-weight-light">{{ truncateText(video.title) }}</p>
 
     <v-card-actions>
-      <span><v-icon>mdi-eye</v-icon> {{ Math.floor(Math.random() * 100) }} views</span>
+      <span
+        ><v-icon>mdi-eye</v-icon>
+        {{ Math.floor(Math.random() * 100) }} views</span
+      >
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import {truncate} from 'lodash-es'
+import { truncate } from 'lodash-es'
 import filterMixin from '~/mixins/filter-mixin'
 
 export default {
@@ -48,11 +45,19 @@ export default {
     video: {
       required: true,
       type: Object,
-    }
+    },
   },
   computed: {
     randomColor: () => {
-      const colors = ['red', 'brown', 'orange', 'green', 'tomato', 'indigo', 'purple']
+      const colors = [
+        'red',
+        'brown',
+        'orange',
+        'green',
+        'tomato',
+        'indigo',
+        'purple',
+      ]
       const randIndex = Math.floor(Math.random() * colors.length)
       return colors[randIndex]
     },
@@ -60,14 +65,12 @@ export default {
   methods: {
     truncateText(text) {
       return truncate(text, {
-        'length': 26,
-        'separator': ' '
-      });
+        length: 30,
+        separator: ' ',
+      })
     },
-  }
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
