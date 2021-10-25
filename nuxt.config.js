@@ -9,6 +9,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'google-site-verification', content: 'RPC1Tvb96ielLl9N8Vtf3vhbnPTEztGVCFENbXRjjeg' },
       { hid: 'description', name: 'description', content: pkg.description },
       { name: 'format-detection', content: 'telephone=no' },
       { property: 'og:url', content: 'https://kointube.herokuapp.com' },
