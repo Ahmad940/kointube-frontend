@@ -6,11 +6,7 @@
     class="grey lighten-2"
   >
     <template #placeholder>
-      <v-row
-        class="fill-height ma-0"
-        align="center"
-        justify="center"
-      >
+      <v-row class="fill-height ma-0" align="center" justify="center">
         <v-progress-circular
           indeterminate
           color="grey lighten-5"
@@ -21,16 +17,15 @@
 </template>
 
 <script>
-export default{
-  name: "KImage",
+export default {
+  name: 'KImage',
   props: {
     image: {
       required: true,
       type: String,
-    }
+    },
   },
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
