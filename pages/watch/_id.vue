@@ -32,7 +32,7 @@
 
           <v-card-actions class='my-0'>
             <v-spacer />
-            <v-btn v-if='!video._count.Like' icon @click='dev'>
+            <v-btn v-if='!video._count.Like' :color='video.liked ? "primary" : "grey"' icon @click='like'>
               <v-icon>mdi-thumb-up</v-icon>
             </v-btn>
             <v-badge
@@ -41,13 +41,13 @@
               overlap
               :content='video._count.Like'
             >
-              <v-btn icon @click='dev'>
+              <v-btn icon :color='video.liked ? "primary" : "grey"'  @click='like'>
                 <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
             </v-badge>
 
 
-            <v-btn v-if='!video._count.dislike' icon @click='dev'>
+            <v-btn v-if='!video._count.dislike' :color='video.disliked ? "primary" : "grey"'  icon @click='dislike'>
               <v-icon>mdi-thumb-down</v-icon>
             </v-btn>
             <v-badge
@@ -56,7 +56,7 @@
               overlap
               :content='video._count.dislike'
             >
-              <v-btn icon @click='dev'>
+              <v-btn icon :color='video.disliked ? "primary" : "grey"'  @click='dislike'>
                 <v-icon>mdi-thumb-down</v-icon>
               </v-btn>
             </v-badge>
@@ -134,7 +134,13 @@ export default {
         'This feature is under development...',
         'Ok'
       )
-    }
+    },
+    like() {
+        this.video.liked = !this.video.liked
+    },
+    dislike() {
+      this.video.disliked = !this.video.disliked
+    },
   }
 }
 </script>
