@@ -8,7 +8,7 @@
               {{ video.author.username.charAt(0).toUpperCase() }}
             </v-avatar>
             <span class="text-h6 font-weight-light">
-              {{ video.author.username }}
+              {{ video.author.username | capitalize }}
             </span>
             <v-spacer />
             <v-btn color="secondary" small depressed @click="dev"
@@ -25,7 +25,7 @@
           </video>
 
           <!--          <v-card-text>-->
-          <v-card-title>{{ video.title }}</v-card-title>
+          <v-card-title>{{ video.title | capitalize }}</v-card-title>
           <!--          </v-card-text>-->
 
           <v-card-actions class="my-0">
@@ -66,6 +66,7 @@ export default {
       const video = await $axios.$get(`/video/${params.id}`)
       // eslint-disable-next-line no-console
       // console.log("FormData", this.formData)
+
       return {
         video,
       }

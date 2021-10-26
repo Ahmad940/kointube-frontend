@@ -9,14 +9,17 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'google-site-verification', content: 'RPC1Tvb96ielLl9N8Vtf3vhbnPTEztGVCFENbXRjjeg' },
+      {
+        name: 'google-site-verification',
+        content: 'RPC1Tvb96ielLl9N8Vtf3vhbnPTEztGVCFENbXRjjeg',
+      },
       { hid: 'description', name: 'description', content: pkg.description },
       { name: 'format-detection', content: 'telephone=no' },
       { property: 'og:url', content: 'https://kointube.herokuapp.com' },
       { property: 'og:type', content: 'streaming' },
       { property: 'og:title', content: 'Kointube' },
       { property: 'og:description', content: pkg.description },
-      { property: 'og:image', content: '/logolight.png' }
+      { property: 'og:image', content: '/logolight.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -37,7 +40,8 @@ export default {
         type: 'image/png',
         sizes: '16x16',
         href: '/favicon-16x16.png',
-      },{
+      },
+      {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
@@ -54,7 +58,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/capitalize.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -90,7 +94,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/auth-next',
-    '@nuxtjs/dayjs'
+    '@nuxtjs/dayjs',
   ],
 
   dayjs: {

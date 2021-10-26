@@ -5,7 +5,7 @@
         {{ video.author.username.charAt(0).toUpperCase() }}
       </v-avatar>
       <span class="text-h6 font-weight-light">
-        {{ video.author.username | startCase }}
+        {{ video.author.username | capitalize }}
       </span>
     </v-card-title>
     <v-card-subtitle>{{ $dayjs(video.createdAt).fromNow() }}</v-card-subtitle>
@@ -23,7 +23,9 @@
 
     <!--          <v-card-text>-->
     <!--          </v-card-text>-->
-    <p class="title pa-2 font-weight-light">{{ truncateText(video.title) }}</p>
+    <p class="title pa-2 font-weight-light">
+      {{ truncateText(video.title) | capitalize }}
+    </p>
 
     <v-card-actions>
       <span
