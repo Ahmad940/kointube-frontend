@@ -30,7 +30,7 @@
     <v-card-actions>
       <span
         ><v-icon>mdi-eye</v-icon>
-        {{ Math.floor(Math.random() * 100) }} views</span
+        {{ video._count.View }} views</span
       >
     </v-card-actions>
   </v-card>
