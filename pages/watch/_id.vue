@@ -41,13 +41,13 @@
               overlap
               :content='video._count.Like'
             >
-              <v-btn icon :color='video.liked ? "primary" : "grey"'  @click='like'>
+              <v-btn icon :color='video.liked ? "primary" : "grey"' @click='like'>
                 <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
             </v-badge>
 
 
-            <v-btn v-if='!video._count.dislike' :color='video.disliked ? "primary" : "grey"'  icon @click='dislike'>
+            <v-btn v-if='!video._count.dislike' :color='video.disliked ? "primary" : "grey"' icon @click='dislike'>
               <v-icon>mdi-thumb-down</v-icon>
             </v-btn>
             <v-badge
@@ -56,7 +56,7 @@
               overlap
               :content='video._count.dislike'
             >
-              <v-btn icon :color='video.disliked ? "primary" : "grey"'  @click='dislike'>
+              <v-btn icon :color='video.disliked ? "primary" : "grey"' @click='dislike'>
                 <v-icon>mdi-thumb-down</v-icon>
               </v-btn>
             </v-badge>
@@ -135,12 +135,36 @@ export default {
         'Ok'
       )
     },
-    like() {
+    async like() {
+      if (this.video.disliked)
+        this.video.disliked = !this.video.disliked
+
+      try {
         this.video.liked = !this.video.liked
+        const request = await this.$axios.$post('/video/action/like', {
+          videoid: this.video.id
+        })
+        this.video._count.Like = request.likes
+      } catch ({ response }) {
+        Report.failure('Error', response.data.message, 'Ok')
+      }
     },
-    dislike() {
-      this.video.disliked = !this.video.disliked
-    },
+    async dislike() {
+      if (this.video.liked)
+        this.video.disliked = !this.video.disliked
+
+      try {
+        this.video.disliked = !this.video.disliked
+        const request = await this.$axios.$post('/video/action/dislike', {
+          videoid: this.video.id
+        })
+        // eslint-disable-next-line no-console
+        console.log('Dislikes', request)
+        this.video._count.dislike = request.dislikes
+      } catch ({ response }) {
+        Report.failure('Error', response.data.message, 'Ok')
+      }
+    }
   }
 }
 </script>

@@ -5,7 +5,7 @@
       <v-col cols="7">
         <p>{{ video.title | capitalize }}</p>
         <p>
-          <v-icon>mdi-eye</v-icon> {{ Math.floor(Math.random() * 100) }} Views
+          <v-icon>mdi-eye</v-icon> {{ video._count.View }} Views
         </p>
       </v-col>
     </v-row>

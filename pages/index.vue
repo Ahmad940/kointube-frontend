@@ -9,10 +9,20 @@
   export default {
     name: 'Home',
     components: { HomeCardsLists },
-    async asyncData({ $axios }) {
-      const videos = await $axios.$get(`/video`)
+    async asyncData({ $axios, error }) {
+      try {
+        const videos = await $axios.$get(`/video`)
+        return { videos }
+      } catch (err) {
+        return error({
+          message: err.message
+        })
+        // return error({
+        //   statusCode: response.status,
+        //   message: response.data.message
+        // })
+      }
 
-      return { videos }
     },
     head: {
       title: 'Home'
