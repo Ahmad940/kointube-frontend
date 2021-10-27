@@ -137,7 +137,7 @@ export default {
     },
     async like() {
       if (this.video.disliked)
-        this.video.disliked = !this.video.disliked
+        this.video.disliked = false
 
       try {
         this.video.liked = !this.video.liked
@@ -148,10 +148,12 @@ export default {
       } catch ({ response }) {
         Report.failure('Error', response.data.message, 'Ok')
       }
+      // eslint-disable-next-line no-console
+      console.log('video after response', this.video)
     },
     async dislike() {
       if (this.video.liked)
-        this.video.disliked = !this.video.disliked
+        this.video.liked = false
 
       try {
         this.video.disliked = !this.video.disliked
