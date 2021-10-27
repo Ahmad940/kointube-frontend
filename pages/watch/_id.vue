@@ -31,6 +31,9 @@
           <!--          </v-card-text>-->
 
           <v-card-actions class='my-0'>
+            <p>
+              <v-icon>mdi-eye</v-icon> {{ video._count.View }} Views
+            </p>
             <v-spacer />
             <v-btn v-if='!video._count.Like' :color='video.liked ? "primary" : "grey"' icon @click='like'>
               <v-icon>mdi-thumb-up</v-icon>
@@ -60,10 +63,10 @@
                 <v-icon>mdi-thumb-down</v-icon>
               </v-btn>
             </v-badge>
-            <v-btn depressed text elevation='=0' @click='dev'>
-              <v-icon left>mdi-cloud-upload</v-icon>
-              Download
-            </v-btn>
+<!--            <v-btn depressed text elevation='=0' @click='dev'>-->
+<!--              <v-icon left>mdi-cloud-upload</v-icon>-->
+<!--              Download-->
+<!--            </v-btn>-->
             <v-btn text depressed elevation='=0' @click='dev'>
               <v-icon left>mdi-share</v-icon>
               Share
@@ -88,8 +91,8 @@ export default {
   async asyncData({ $axios, params, error }) {
     try {
       const video = await $axios.$get(`/video/${params.id}`)
-      // eslint-disable-next-line no-console
-      console.log('video', video)
+      // // eslint-disable-next-line no-console
+      // console.log('video', video)
 
       return {
         video
@@ -136,33 +139,56 @@ export default {
       )
     },
     async like() {
-      if (this.video.disliked)
+      // checking if the video is already dislike then you update some properties
+      if (this.video.disliked) {
+        // setting the disliked property to false
         this.video.disliked = false
+        // decreasing the dislike number
+        this.video._count.dislike = this.video._count.dislike - 1
+      }
 
       try {
+        // setting the liked boolean porperty to opposite of it value
         this.video.liked = !this.video.liked
+
+        // sending the like to server
         const request = await this.$axios.$post('/video/action/like', {
           videoid: this.video.id
         })
+
+        // to improve performance we are not going to send a request to retreive the video meta data again
+        // or run this.$nuxt.refresh() we are going to target the video object properties and update it
         this.video._count.Like = request.likes
       } catch ({ response }) {
         Report.failure('Error', response.data.message, 'Ok')
       }
-      // eslint-disable-next-line no-console
-      console.log('video after response', this.video)
     },
     async dislike() {
-      if (this.video.liked)
+      // if video already like we are going to unlike it
+      if (this.video.liked) {
+        // removing the count number from the video object
         this.video.liked = false
+        // decreasing the like number
+        this.video._count.Like = this.video._count.Like - 1
+      }
 
       try {
+        // setting the object property to opposite of it self
         this.video.disliked = !this.video.disliked
-        const request = await this.$axios.$post('/video/action/dislike', {
+        await this.$axios.$post('/video/action/dislike', {
           videoid: this.video.id
         })
-        // eslint-disable-next-line no-console
-        console.log('Dislikes', request)
-        this.video._count.dislike = request.dislikes
+
+        // to improve performance we are not going to send a request to retreive the video meta data again
+        // or run this.$nuxt.refresh() we are going to target the video object properties and update it
+
+        // the server is returning an unexpected value for the dislike
+        // it was tested and it working normal in postman
+        // but i dont know why it not working in production
+        if (!this.video.disliked)
+          this.video._count.dislike = this.video._count.dislike - 1
+        else
+          this.video._count.dislike = this.video._count.dislike + 1
       } catch ({ response }) {
         Report.failure('Error', response.data.message, 'Ok')
       }
