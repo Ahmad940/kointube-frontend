@@ -55,7 +55,7 @@
                 >
                   <v-progress-circular
                     indeterminate
-                    color='grey lighten-5'
+                    color='grey'
                   ></v-progress-circular>
                 </v-row>
               </template>
