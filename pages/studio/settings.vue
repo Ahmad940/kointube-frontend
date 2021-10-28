@@ -1,33 +1,50 @@
 <template>
   <v-container>
-    <p class='title'>Upload Video</p>
+    <p>Settings page</p>
     <v-form ref='form'
             v-model='valid'
             lazy-validation
-            @submit.prevent='uploadVideo'>
+            @submit.prevent='saveUserInfo'>
 
       <v-row>
-        <v-col cols='12'>
-          <v-text-field v-model='formData.title'
-                        :rules='[fieldRequired, titleMin]'
-                        label='Title'
-                        placeholder='Enter Title...'
+
+        <!--        username section ... -->
+        <v-col cols='12' sm='6' md='6'>
+          <v-text-field v-model='formData.username'
+                        type='text'
+                        name='username'
+                        :rules='[fieldRequired]'
+                        label='Username'
+                        placeholder='Enter Username...'
                         dense
                         outlined />
         </v-col>
 
-        <!--        upload image col-->
+        <!--        channel name section ...-->
+        <v-col cols='12' sm='6' md='6'>
+          <v-text-field v-model='formData.channel_name'
+                        :rules='[]'
+                        type='text'
+                        name='channel_name'
+                        label='Channel Name'
+                        placeholder='Enter Channel Name...'
+                        hint='[Optional field]'
+                        dense
+                        outlined />
+        </v-col>
+
+        <!--        profile image col-->
         <v-col cols='12' md='4'>
-          <p class=''>Thumbnail</p>
+          <p class=''>Profile Image</p>
           <v-card
-            v-if='formData.thumbnailUrl'
+            v-if='formData.profile_img'
             height='250'
-            width='250'
-            @mouseenter='thumbnailOverlay = true'
-            @mouseleave='thumbnailOverlay = false'>
+            width='100%'
+            @mouseenter='profileImgOverlay = true'
+            @mouseleave='profileImgOverlay = false'>
             <v-overlay
               absolute
-              :value='thumbnailOverlay'
+              :value='profileImgOverlay'
             >
               <v-btn
                 class='mx-2'
@@ -35,7 +52,7 @@
                 dark
                 small
                 color='primary'
-                @click='closeThumbnailOverlay'
+                @click='closeProfileImgOverlay'
               >
                 <v-icon dark color='white'>
                   mdi-close
@@ -44,7 +61,7 @@
             </v-overlay>
             <v-img
               lazy-src='/minilogo.png'
-              :src='formData.thumbnailUrl'
+              :src='formData.profile_img'
               height='250'
               width='250'>
               <template #placeholder>
@@ -55,7 +72,7 @@
                 >
                   <v-progress-circular
                     indeterminate
-                    color='grey lighten-5'
+                    color='grey'
                   ></v-progress-circular>
                 </v-row>
               </template>
@@ -63,7 +80,7 @@
           </v-card>
           <v-dialog
             v-else
-            v-model='thumbnailDialog'
+            v-model='profileImgDialog'
             persistent
             max-width='500'
           >
@@ -72,33 +89,33 @@
                 class='thumb'
                 v-bind='attrs'
                 v-on='on'>
-                <p>Upload Thumbnail</p>
+                <p>Upload Profile Image</p>
               </div>
             </template>
             <v-card>
               <v-card-title class='text-h5'>
-                Upload Thumbnail
+                Upload Profile Image
               </v-card-title>
               <v-card-text>
-                <v-form ref='thumbnailForm'>
+                <v-form ref='profileImgForm'>
                   <v-file-input
-                    v-model='thumbnail'
+                    v-model='profile_img'
                     :rules='[fieldRequired, thumbMaxSiz]'
                     accept='image/png, image/jpeg, image/bmp'
                     placeholder='Select Picture'
                     prepend-icon='mdi-camera'
-                    label='Upload Thumbnail'
+                    label='Upload Profile Image'
                     show-size
                   ></v-file-input>
                 </v-form>
 
                 <v-progress-linear
-                  v-show='thumbnailUploadProgress !== 0'
-                  v-model='thumbnailUploadProgress'
-                  :value='thumbnailUploadProgress'
+                  v-show='profileImgUploadProgress !== 0'
+                  v-model='profileImgUploadProgress'
+                  :value='profileImgUploadProgress'
                   height='25'
                 >
-                  <strong class='white--text'>{{ Math.ceil(thumbnailUploadProgress) }}%</strong>
+                  <strong class='white--text'>{{ Math.ceil(profileImgUploadProgress) }}%</strong>
                 </v-progress-linear>
 
               </v-card-text>
@@ -107,14 +124,14 @@
                 <v-btn
                   color='green darken-1'
                   text
-                  @click='closeThumbnailDialog'
+                  @click='closeProfileImgDialog'
                 >
                   Close
                 </v-btn>
                 <v-btn
                   color='green darken-1'
                   text
-                  @click='uploadThumbnailDialogHandler'
+                  @click='uploadProfileImgDialogHandler'
                 >
                   Upload
                 </v-btn>
@@ -123,18 +140,18 @@
           </v-dialog>
         </v-col>
 
-        <!--        upload video col-->
+        <!--        cover image col-->
         <v-col cols='12' md='4'>
-          <p class=''>Video</p>
+          <p class=''>Cover Image</p>
           <v-card
-            v-if='formData.videoUrl'
+            v-if='formData.cover_img'
             height='250'
-            width='250'
-            @mouseenter='videoOverlay = true'
-            @mouseleave='videoOverlay = false'>
+            width='100%'
+            @mouseenter='coverImgOverlay = true'
+            @mouseleave='coverImgOverlay = false'>
             <v-overlay
               absolute
-              :value='videoOverlay'
+              :value='coverImgOverlay'
             >
               <v-btn
                 class='mx-2'
@@ -142,22 +159,35 @@
                 dark
                 small
                 color='primary'
-                @click='closeVideoOverlay'
+                @click='closeCoverImgOverlay'
               >
                 <v-icon dark color='white'>
                   mdi-close
                 </v-icon>
               </v-btn>
             </v-overlay>
-
-            <video controls width='250' height='250'>
-              <source type='video/mp4' :src='formData.videoUrl' />
-            </video>
-
+            <v-img
+              lazy-src='/minilogo.png'
+              :src='formData.cover_img'
+              height='250'
+              width='250'>
+              <template #placeholder>
+                <v-row
+                  class='fill-height ma-0'
+                  align='center'
+                  justify='center'
+                >
+                  <v-progress-circular
+                    indeterminate
+                    color='grey'
+                  ></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
           </v-card>
           <v-dialog
             v-else
-            v-model='videoDialog'
+            v-model='coverImgDialog'
             persistent
             max-width='500'
           >
@@ -166,62 +196,59 @@
                 class='thumb'
                 v-bind='attrs'
                 v-on='on'>
-                <p>
-                  Upload Video
-                </p>
+                <p>Upload Cover Image</p>
               </div>
             </template>
             <v-card>
               <v-card-title class='text-h5'>
-                Upload Video
+                Upload Cover Imae
               </v-card-title>
               <v-card-text>
-                <v-form ref='videoForm'>
+                <v-form ref='coverImgForm'>
                   <v-file-input
-                    v-model='video'
+                    v-model='cover_img'
+                    :rules='[fieldRequired, thumbMaxSiz]'
+                    accept='image/png, image/jpeg, image/bmp'
+                    placeholder='Select Picture'
+                    prepend-icon='mdi-camera'
+                    label='Upload Cover Image'
                     show-size
-                    :rules='[fieldRequired]'
-                    accept='video/mp4,video/x-m4v,video/*'
-                    placeholder='Select video'
-                    prepend-icon='mdi-video'
-                    label='Upload Video'
                   ></v-file-input>
                 </v-form>
 
                 <v-progress-linear
-                  v-show='videoUploadProgress !== 0'
-                  v-model='videoUploadProgress'
-                  :value='videoUploadProgress'
+                  v-show='coverImgUploadProgress !== 0'
+                  v-model='coverImgUploadProgress'
+                  :value='coverImgUploadProgress'
                   height='25'
                 >
-                  <strong class='white--text'>{{ Math.ceil(videoUploadProgress) }}%</strong>
+                  <strong class='white--text'>{{ Math.ceil(coverImgUploadProgress) }}%</strong>
                 </v-progress-linear>
+
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
                   color='green darken-1'
                   text
-                  @click='closeVideoDialog'
+                  @click='closeCoverImgDialog'
                 >
                   Close
                 </v-btn>
                 <v-btn
                   color='green darken-1'
                   text
-                  @click='uploadVideoDialogHandler'
+                  @click='uploadCoverImgDialogHandler'
                 >
                   Upload
                 </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
-
         </v-col>
 
-
         <v-col cols='12' class='mt-7'>
-          <v-btn width='49%' color='secondary' @click='$router.push("content")'>
+          <v-btn width='49%' color='secondary' @click='$router.push("dashboard")'>
             <v-icon dark left>mdi-close</v-icon>
             Cancel
           </v-btn>
@@ -232,12 +259,10 @@
             color='primary'
             :loading='loading'>
             <v-icon left>mdi-cloud-upload</v-icon>
-            Upload
+            Save
           </v-btn>
         </v-col>
-
       </v-row>
-
     </v-form>
   </v-container>
 </template>
@@ -247,55 +272,62 @@ import { Report } from 'notiflix'
 import rules from '../../mixins/rules'
 
 export default {
-  name: 'Upload',
+  name: 'Settings',
   mixins: [rules],
   layout: 'studio',
+  asyncData({ $auth }) {
+    const user = $auth.user
+    // eslint-disable-next-line no-console
+    console.log('User', user)
+    return { formData: user }
+  },
   data() {
     return {
-      thumbnailOverlay: false,
-      videoOverlay: false,
-      thumbnailUploadProgress: 0,
-      videoUploadProgress: 0,
       loading: false,
       valid: false,
-      videoDialog: false,
-      thumbnailDialog: false,
-      thumbnail: null,
-      video: null,
+      profileImgOverlay: false,
+      coverImgOverlay: false,
+      profileImgUploadProgress: 0,
+      coverImgUploadProgress: 0,
+      profileImgDialog: false,
+      coverImgDialog: false,
+      profile_img: null,
+      cover_img: null,
       formData: {
-        title: '',
-        thumbnailUrl: '',
-        videoUrl: ''
+        username: '',
+        channel_name: '',
+        profile_img: '',
+        cover_img: ''
       }
     }
   },
   head: {
-    title: 'Upload Video'
+    title: 'Settings'
   },
   methods: {
-    closeThumbnailOverlay() {
-      this.formData.thumbnailUrl = ''
-      this.thumbnailOverlay = false
+    closeProfileImgOverlay() {
+      this.formData.profile_img = ''
+      this.profileImgOverlay = false
     },
-    closeVideoOverlay() {
-      this.formData.videoUrl = ''
-      this.videoOverlay = false
+    closeCoverImgOverlay() {
+      this.formData.cover_img = ''
+      this.coverImgOverlay = false
     },
-    closeThumbnailDialog() {
-      this.thumbnailUploadProgress = 0
-      this.thumbnail = null
-      this.thumbnailDialog = false
+    closeProfileImgDialog() {
+      this.profileImgUploadProgress = 0
+      this.profile_img = null
+      this.profileImgDialog = false
     },
-    closeVideoDialog() {
-      this.videoUploadProgress = 0
-      this.video = null
-      this.videoDialog = false
+    closeCoverImgDialog() {
+      this.coverImgUploadProgress = 0
+      this.cover_img = null
+      this.coverImgDialog = false
     },
-    async uploadThumbnailDialogHandler() {
-      if (!this.$refs.thumbnailForm.validate()) return
+    async uploadProfileImgDialogHandler() {
+      if (!this.$refs.profileImgForm.validate()) return
 
       const formData = new FormData()
-      formData.append('image', this.thumbnail)
+      formData.append('image', this.profile_img)
       const headers = { 'Content-Type': 'multipart/form-data' }
       const response = await this.$axios.$post(
         'https://kointube-uploader.herokuapp.com/upload/image',
@@ -303,49 +335,51 @@ export default {
         {
           headers,
           onUploadProgress: function(progressEvent) {
-            this.thumbnailUploadProgress = parseInt(Math.round((progressEvent.loaded / progressEvent.total) * 100))
+            this.profileImgUploadProgress = parseInt(Math.round((progressEvent.loaded / progressEvent.total) * 100))
           }.bind(this)
         }
       )
 
-      this.formData.thumbnailUrl = response.SecureURL
+      this.formData.profile_img = response.SecureURL
 
-      this.closeThumbnailDialog()
+      this.closeProfileImgDialog()
     },
-    async uploadVideoDialogHandler() {
-      if (!this.$refs.videoForm.validate()) return
+    async uploadCoverImgDialogHandler() {
+      if (!this.$refs.coverImgForm.validate()) return
 
       const formData = new FormData()
-      formData.append('video', this.video)
+      formData.append('image', this.cover_img)
       const headers = { 'Content-Type': 'multipart/form-data' }
       const response = await this.$axios.$post(
-        'https://kointube-uploader.herokuapp.com/upload/video',
+        'https://kointube-uploader.herokuapp.com/upload/image',
         formData,
         {
           headers,
           onUploadProgress: function(progressEvent) {
-            this.videoUploadProgress = parseInt(Math.round((progressEvent.loaded / progressEvent.total) * 100))
+            this.coverImgUploadProgress = parseInt(Math.round((progressEvent.loaded / progressEvent.total) * 100))
           }.bind(this)
         }
       )
 
-      this.formData.videoUrl = response.SecureURL
+      this.formData.cover_img = response.SecureURL
 
-      this.closeVideoDialog()
+      this.closeCoverImgDialog()
     },
-    async uploadVideo() {
+    async saveUserInfo() {
       if (!this.$refs.form.validate()) return
 
-      if (!this.formData.thumbnailUrl) return Report.failure('Error', 'Thumbnail required', 'Ok')
-      if (!this.formData.videoUrl) return Report.failure('Error', 'Video required', 'Ok')
+      // eslint-disable-next-line no-console
+      console.log('formData', this.formData)
+
+      if (!this.formData.profile_img) return Report.failure('Error', 'Profile Image required', 'Ok')
+      if (!this.formData.cover_img) return Report.failure('Error', 'Cover Image required', 'Ok')
 
       try {
         this.loading = true
 
-        await this.$axios.$post('/video', this.formData)
+        await this.$axios.$patch('/users', this.formData)
         this.loading = false
-        await this.$auth.fetchUser()
-        await this.$router.push('content')
+        await this.$router.push('dashboard')
       } catch ({ response }) {
         // eslint-disable-next-line no-console
         console.log(response)
@@ -360,7 +394,7 @@ export default {
 <style scoped>
 .thumb {
   height: 250px;
-  width: 250px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
