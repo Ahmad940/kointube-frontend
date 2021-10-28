@@ -38,7 +38,7 @@
           </v-col>
 
           <!--        profile image col-->
-          <v-col cols='12' md='4'>
+          <v-col cols='12' md='6'>
             <p class=''>Profile Image</p>
             <v-card
               v-if='formData.profile_img'
@@ -67,7 +67,7 @@
                 lazy-src='/minilogo.png'
                 :src='formData.profile_img'
                 height='250'
-                width='250'>
+                width='100%'>
                 <template #placeholder>
                   <v-row
                     class='fill-height ma-0'
@@ -145,7 +145,7 @@
           </v-col>
 
           <!--        cover image col-->
-          <v-col cols='12' md='4'>
+          <v-col cols='12' md='6'>
             <p class=''>Cover Image</p>
             <v-card
               v-if='formData.cover_img'
@@ -174,7 +174,7 @@
                 lazy-src='/minilogo.png'
                 :src='formData.cover_img'
                 height='250'
-                width='250'>
+                width='100%'>
                 <template #placeholder>
                   <v-row
                     class='fill-height ma-0'

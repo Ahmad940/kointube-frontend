@@ -21,7 +21,7 @@
         <v-card
           v-if='formData.thumbnailUrl'
           height='250'
-          width='250'
+          width='100%'
           @mouseenter='thumbnailOverlay = true'
           @mouseleave='thumbnailOverlay = false'>
           <v-overlay
@@ -45,7 +45,7 @@
             lazy-src='/minilogo.png'
             :src='formData.thumbnailUrl'
             height='250'
-            width='250'>
+            width='100%'>
             <template #placeholder>
               <v-row
                 class='fill-height ma-0'
@@ -54,7 +54,7 @@
               >
                 <v-progress-circular
                   indeterminate
-                  color='grey lighten-5'
+                  color='grey'
                 ></v-progress-circular>
               </v-row>
             </template>
@@ -238,7 +238,7 @@ export default {
 <style scoped>
 .thumb {
   height: 250px;
-  width: 250px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

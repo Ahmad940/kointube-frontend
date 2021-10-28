@@ -22,7 +22,7 @@
           <v-card
             v-if='formData.thumbnailUrl'
             height='250'
-            width='250'
+            width='100%'
             @mouseenter='thumbnailOverlay = true'
             @mouseleave='thumbnailOverlay = false'>
             <v-overlay
@@ -46,7 +46,7 @@
               lazy-src='/minilogo.png'
               :src='formData.thumbnailUrl'
               height='250'
-              width='250'>
+              width='100%'>
               <template #placeholder>
                 <v-row
                   class='fill-height ma-0'
@@ -129,7 +129,7 @@
           <v-card
             v-if='formData.videoUrl'
             height='250'
-            width='250'
+            width='100%'
             @mouseenter='videoOverlay = true'
             @mouseleave='videoOverlay = false'>
             <v-overlay
@@ -150,7 +150,7 @@
               </v-btn>
             </v-overlay>
 
-            <video controls width='250' height='250'>
+            <video controls width='100%' height='250'>
               <source type='video/mp4' :src='formData.videoUrl' />
             </video>
 
@@ -360,7 +360,7 @@ export default {
 <style scoped>
 .thumb {
   height: 250px;
-  width: 250px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
