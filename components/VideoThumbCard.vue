@@ -1,5 +1,5 @@
 <template>
-  <v-card height="445" width="100%" :to="`/watch/${video.id}`">
+  <v-card height="445" width="100%" flat outlined :to="`/watch/${video.id}`">
     <v-card-title>
       <v-avatar size="30" class="mr-2 white--text" :color="randomColor">
         {{ video.author.username.charAt(0).toUpperCase() }}
@@ -13,10 +13,7 @@
     <v-img height="250" :src="video.thumbnailUrl" :alt="video.title">
       <template #placeholder>
         <v-row class="fill-height ma-0" align="center" justify="center">
-          <v-progress-circular
-            indeterminate
-            color="grey"
-          ></v-progress-circular>
+          <v-progress-circular indeterminate color="grey"></v-progress-circular>
         </v-row>
       </template>
     </v-img>
@@ -28,10 +25,7 @@
     </p>
 
     <v-card-actions>
-      <span
-        ><v-icon>mdi-eye</v-icon>
-        {{ video._count.View }} views</span
-      >
+      <span><v-icon>mdi-eye</v-icon> {{ video._count.View }} views</span>
     </v-card-actions>
   </v-card>
 </template>

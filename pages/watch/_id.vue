@@ -1,83 +1,113 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols='12' md='8'>
-        <v-card>
+    <v-row class="mt-5">
+      <v-col cols="12" md="8">
+        <v-card flat outlined>
           <v-card-title>
-            <v-avatar size='30' class='mr-2 white--text' :color='randomColor'>
+            <v-avatar size="30" class="mr-2 white--text" :color="randomColor">
               {{ video.author.username.charAt(0).toUpperCase() }}
             </v-avatar>
-            <span class='text-h6 font-weight-light'>
+            <span class="text-h6 font-weight-light">
               {{ video.author.username | capitalize }}
             </span>
             <v-spacer />
-            <v-btn color='secondary' small depressed @click='dev'
-            >Subscribe
-            </v-btn
-            >
+            <v-btn color="secondary" small depressed @click="dev"
+              >Subscribe
+            </v-btn>
           </v-card-title>
 
-          <v-card-subtitle>{{
-              $dayjs(video.createdAt).fromNow()
-            }}
+          <v-card-subtitle
+            >{{ $dayjs(video.createdAt).fromNow() }}
           </v-card-subtitle>
 
-          <video controls width='100%' height='320'>
-            <source :src='video.videoUrl' type='video/mp4' />
+          <video controls width="100%" height="320">
+            <source :src="video.videoUrl" type="video/mp4" />
           </video>
 
           <!--          <v-card-text>-->
           <v-card-title>{{ video.title | capitalize }}</v-card-title>
           <!--          </v-card-text>-->
 
-          <v-card-actions class='my-0'>
-            <p>
-              <v-icon>mdi-eye</v-icon> {{ video._count.View }} Views
-            </p>
+          <v-card-actions class="my-0">
+            <p><v-icon>mdi-eye</v-icon> {{ video._count.View }} Views</p>
             <v-spacer />
-            <v-btn v-if='!video._count.Like' :color='video.liked ? "primary" : "grey"' icon @click='like'>
+            <v-btn
+              v-if="!video._count.Like"
+              :color="video.liked ? 'primary' : 'grey'"
+              icon
+              @click="like"
+            >
               <v-icon>mdi-thumb-up</v-icon>
             </v-btn>
-            <v-badge
-              v-else
-              color='green'
-              overlap
-              :content='video._count.Like'
-            >
-              <v-btn icon :color='video.liked ? "primary" : "grey"' @click='like'>
+            <v-badge v-else color="green" overlap :content="video._count.Like">
+              <v-btn
+                icon
+                :color="video.liked ? 'primary' : 'grey'"
+                @click="like"
+              >
                 <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
             </v-badge>
 
-
-            <v-btn v-if='!video._count.dislike' :color='video.disliked ? "primary" : "grey"' icon @click='dislike'>
+            <v-btn
+              v-if="!video._count.dislike"
+              :color="video.disliked ? 'primary' : 'grey'"
+              icon
+              @click="dislike"
+            >
               <v-icon>mdi-thumb-down</v-icon>
             </v-btn>
             <v-badge
               v-else
-              color='green'
+              color="green"
               overlap
-              :content='video._count.dislike'
+              :content="video._count.dislike"
             >
-              <v-btn icon :color='video.disliked ? "primary" : "grey"' @click='dislike'>
+              <v-btn
+                icon
+                :color="video.disliked ? 'primary' : 'grey'"
+                @click="dislike"
+              >
                 <v-icon>mdi-thumb-down</v-icon>
               </v-btn>
             </v-badge>
-<!--            <v-btn depressed text elevation='=0' @click='dev'>-->
-<!--              <v-icon left>mdi-cloud-upload</v-icon>-->
-<!--              Download-->
-<!--            </v-btn>-->
-            <v-btn text depressed elevation='=0' @click='dev'>
+            <!--            <v-btn depressed text elevation='=0' @click='dev'>-->
+            <!--              <v-icon left>mdi-cloud-upload</v-icon>-->
+            <!--              Download-->
+            <!--            </v-btn>-->
+            <v-btn text depressed elevation="=0" @click="dev">
               <v-icon left>mdi-share</v-icon>
               Share
             </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
-      <v-col cols='12' md='4'>
+      <v-col cols="12" md="4">
         <recommended-section-list />
       </v-col>
     </v-row>
+    <div>
+      <v-divider class="my-10" />
+      <h4>Comments</h4>
+      <div class="mt-5">
+        <v-expansion-panels flat multiple>
+          <v-expansion-panel>
+            <v-expansion-panel-header>Comment 1</v-expansion-panel-header>
+            <v-expansion-panel-content> Replies </v-expansion-panel-content>
+          </v-expansion-panel>
+
+          <v-expansion-panel>
+            <v-expansion-panel-header>Comment 2</v-expansion-panel-header>
+            <v-expansion-panel-content> Replies </v-expansion-panel-content>
+          </v-expansion-panel>
+
+          <v-expansion-panel>
+            <v-expansion-panel-header>Comment 3</v-expansion-panel-header>
+            <v-expansion-panel-content> Replies </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -95,18 +125,18 @@ export default {
       // console.log('video', video)
 
       return {
-        video
+        video,
       }
     } catch ({ response }) {
       // Report.failure('Error', response.data.message, 'Ok')
       if (response.status === 404)
         return error({
           statusCode: response.status,
-          message: response.data.message
+          message: response.data.message,
         })
       return error({
         statusCode: response.status,
-        message: response.data.message
+        message: response.data.message,
       })
     }
   },
@@ -119,7 +149,7 @@ export default {
         'green',
         'tomato',
         'indigo',
-        'purple'
+        'purple',
       ]
       const randIndex = Math.floor(Math.random() * colors.length)
       return colors[randIndex]
@@ -128,7 +158,7 @@ export default {
       // eslint-disable-next-line no-console
       console.log('dayjs', this.$dayjs)
       return this.$dayjs().format('YYYY/MM/DD')
-    }
+    },
   },
   methods: {
     dev() {
@@ -153,7 +183,7 @@ export default {
 
         // sending the like to server
         const request = await this.$axios.$post('/video/action/like', {
-          videoid: this.video.id
+          videoid: this.video.id,
         })
 
         // to improve performance we are not going to send a request to retreive the video meta data again
@@ -176,7 +206,7 @@ export default {
         // setting the object property to opposite of it self
         this.video.disliked = !this.video.disliked
         await this.$axios.$post('/video/action/dislike', {
-          videoid: this.video.id
+          videoid: this.video.id,
         })
 
         // to improve performance we are not going to send a request to retreive the video meta data again
@@ -187,13 +217,12 @@ export default {
         // but i dont know why it not working in production
         if (!this.video.disliked)
           this.video._count.dislike = this.video._count.dislike - 1
-        else
-          this.video._count.dislike = this.video._count.dislike + 1
+        else this.video._count.dislike = this.video._count.dislike + 1
       } catch ({ response }) {
         Report.failure('Error', response.data.message, 'Ok')
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

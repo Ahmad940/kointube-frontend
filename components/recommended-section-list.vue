@@ -6,7 +6,7 @@
       </div>
     </div>
     <div v-for="video in videos" v-else :key="video.id">
-      <v-card color="accent" flat :to="`/watch/${video.id}`">
+      <v-card color="accent" flat outlined :to="`/watch/${video.id}`">
         <recommended-video :video="video" />
       </v-card>
     </div>
