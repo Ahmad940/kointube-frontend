@@ -18,7 +18,7 @@
         >
           <v-img
             height="250"
-            src="/channellogo.jpg"
+            :src="channel.profile_img"
             :alt="channel.title"
           >
             <template #placeholder>
@@ -35,10 +35,10 @@
             </template>
           </v-img>
           <v-card-title>
-            <v-avatar size='30' class='mr-2 white--text' :color='randomColor'>
-              {{ channel.username.charAt(0).toUpperCase() }}
-            </v-avatar>
-            <span class='text-h6 font-weight-light'> {{ channel.username | startCase }} </span>
+<!--            <v-avatar size='30' class='mr-2 white&#45;&#45;text' :color='randomColor'>-->
+<!--              <v-img  />-->
+<!--            </v-avatar>-->
+            <span class='text-h6 font-weight-light'> {{ channel.channel_name || channel.username | startCase }} </span>
           </v-card-title>
         </v-card>
       </v-col>

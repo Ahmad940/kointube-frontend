@@ -5,7 +5,8 @@
         <v-list-item dense v-bind="attrs" v-on="on">
 
           <v-avatar size="30" class="mr-2 white--text" :color='randomColor'>
-            {{ $auth.user.username.charAt(0).toUpperCase() }}
+<!--            {{ $auth.user.username.charAt(0).toUpperCase() }}-->
+            <v-img :src='$auth.user.profile_img' lazy-src='/minilogo.png' />
           </v-avatar>
 
           <!--          <v-list-item-title  class="white&#45;&#45;text">Ahmad Muhammad</v-list-item-title>-->
