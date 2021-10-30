@@ -5,7 +5,8 @@
         <v-card flat outlined>
           <v-card-title>
             <v-avatar size="30" class="mr-2 white--text" :color="randomColor">
-              {{ video.author.username.charAt(0).toUpperCase() }}
+<!--              {{ video.author.username.charAt(0).toUpperCase() }}-->
+              <v-img :src='video.author.profile_img' lazy-src='/minilogo.png' />
             </v-avatar>
             <span class="text-h6 font-weight-light">
               {{ video.author.username | capitalize }}
