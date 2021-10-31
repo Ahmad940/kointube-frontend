@@ -5,8 +5,8 @@
         <v-card flat outlined>
           <v-card-title>
             <v-avatar size="30" class="mr-2 white--text" :color="randomColor">
-<!--              {{ video.author.username.charAt(0).toUpperCase() }}-->
-              <v-img :src='video.author.profile_img' lazy-src='/minilogo.png' />
+              <!--              {{ video.author.username.charAt(0).toUpperCase() }}-->
+              <v-img :src="video.author.profile_img" lazy-src="/minilogo.png" />
             </v-avatar>
             <span class="text-h6 font-weight-light">
               {{ video.author.username | capitalize }}
@@ -91,7 +91,21 @@
       <v-divider class="my-10" />
       <h4>Comments</h4>
       <div class="mt-5">
-        <comment-card />
+        <v-container class="mb-5">
+          <div>
+            <div>
+              <v-text-field v-model="content" outlined dense append-icon="" />
+            </div>
+            <div class="flex-grow-0">
+              <v-btn color="primary" @click="makeComment">Add Comment</v-btn>
+            </div>
+          </div>
+        </v-container>
+        <comment-card
+          v-for="comment in comments"
+          :key="comment.id"
+          :comment="comment"
+        />
       </div>
     </div>
   </div>
@@ -108,11 +122,13 @@ export default {
   async asyncData({ $axios, params, error }) {
     try {
       const video = await $axios.$get(`/video/${params.id}`)
-      // // eslint-disable-next-line no-console
-      // console.log('video', video)
+      const comments = await $axios.$get(`/video/action/comment/${params.id}`)
+      // eslint-disable-next-line no-console
+      console.log('comments', comments)
 
       return {
         video,
+        comments,
       }
     } catch ({ response }) {
       // Report.failure('Error', response.data.message, 'Ok')
@@ -127,6 +143,12 @@ export default {
       })
     }
   },
+  data() {
+    return {
+      content: '',
+    }
+  },
+
   computed: {
     randomColor: () => {
       const colors = [
@@ -207,6 +229,18 @@ export default {
         else this.video._count.dislike = this.video._count.dislike + 1
       } catch ({ response }) {
         Report.failure('Error', response.data.message, 'Ok')
+      }
+    },
+    async makeComment() {
+      try {
+        const newComment = await this.$axios.$post('/video/action/comment', {
+          content: this.content,
+          videoid: this.video.id,
+        })
+
+        this.comments.push(newComment)
+      } catch ({ response }) {
+        Report.failure('Error')
       }
     },
   },
