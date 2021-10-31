@@ -1,13 +1,16 @@
 <template>
   <v-card height="445" width="100%" flat outlined :to="`/watch/${video.id}`">
     <v-card-title>
-      <v-avatar size="30" class="mr-2 white--text" :color="randomColor">
-<!--        {{ video.author.username.charAt(0).toUpperCase() }}-->
+      <v-avatar size="30" class="mr-2 white--text">
         <v-img :src='video.author.profile_img' lazy-src='/minilogo.png' />
       </v-avatar>
       <span class="text-h6 font-weight-light">
         {{ video.author.channel_name || video.author.username | capitalize }}
       </span>
+
+      <v-spacer />
+      <v-icon @click.prevent="$emit('deleteVideo', video)">mdi-close</v-icon>
+
     </v-card-title>
     <v-card-subtitle>{{ $dayjs(video.createdAt).fromNow() }}</v-card-subtitle>
 
@@ -36,7 +39,7 @@ import { truncate } from 'lodash-es'
 import filterMixin from '~/mixins/filter-mixin'
 
 export default {
-  name: 'VideoThumbCard',
+  name: 'HistoryThumbCard',
   mixins: [filterMixin],
   props: {
     video: {
@@ -45,19 +48,6 @@ export default {
     },
   },
   computed: {
-    randomColor: () => {
-      const colors = [
-        'red',
-        'brown',
-        'orange',
-        'green',
-        'tomato',
-        'indigo',
-        'purple',
-      ]
-      const randIndex = Math.floor(Math.random() * colors.length)
-      return colors[randIndex]
-    },
   },
   methods: {
     truncateText(text) {

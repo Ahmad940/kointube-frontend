@@ -1,15 +1,15 @@
 <template>
   <div>
     <p>History Log</p>
-    <LikedVideoLists :videos='videos' />
+    <HistoryVideoLists :videos='videos' />
   </div>
 </template>
 
 <script>
-import LikedVideoLists from '../../components/LikedVideosList'
+import HistoryVideoLists from '../../components/HistoryVideosList'
 export default {
   name: 'HistoryPage',
-  components: { LikedVideoLists },
+  components: { HistoryVideoLists },
   async asyncData({ $axios, error, $auth }) {
     try {
       const videos = await $axios.$get(`/history/${$auth.user.id}`)
