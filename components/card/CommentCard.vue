@@ -5,7 +5,7 @@
         <v-row align="start" justify="start">
           <v-col class="flex-grow-0">
             <v-avatar color="red" size="40">
-              <img :src="comment.user.imageUrl" alt="John" />
+              <img :src="comment.user.profile_img" alt="John" />
             </v-avatar>
           </v-col>
           <v-col>
