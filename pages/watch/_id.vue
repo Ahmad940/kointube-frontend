@@ -91,22 +91,7 @@
       <v-divider class="my-10" />
       <h4>Comments</h4>
       <div class="mt-5">
-        <v-expansion-panels flat multiple>
-          <v-expansion-panel>
-            <v-expansion-panel-header>Comment 1</v-expansion-panel-header>
-            <v-expansion-panel-content> Replies </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header>Comment 2</v-expansion-panel-header>
-            <v-expansion-panel-content> Replies </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header>Comment 3</v-expansion-panel-header>
-            <v-expansion-panel-content> Replies </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
+        <comment-card />
       </div>
     </div>
   </div>
@@ -115,10 +100,11 @@
 <script>
 import { Report } from 'notiflix'
 import recommendedSectionList from '../../components/recommended-section-list.vue'
+import CommentCard from '../../components/card/CommentCard.vue'
 
 export default {
   name: 'WatchPage',
-  components: { recommendedSectionList },
+  components: { recommendedSectionList, CommentCard },
   async asyncData({ $axios, params, error }) {
     try {
       const video = await $axios.$get(`/video/${params.id}`)
