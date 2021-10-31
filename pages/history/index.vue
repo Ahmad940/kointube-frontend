@@ -13,8 +13,6 @@ export default {
   async asyncData({ $axios, error, $auth }) {
     try {
       const videos = await $axios.$get(`/history/${$auth.user.id}`)
-      // eslint-disable-next-line no-console
-      console.log("videos", videos)
       return { videos }
     } catch (err) {
       return error({
