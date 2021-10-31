@@ -91,7 +91,8 @@ export default {
     items: [
       { title: 'Home', icon: 'mdi-home', to: '/' },
       { title: 'Channels', icon: 'mdi-video-plus', to: '/channels' },
-      { title: 'Explore', icon: 'mdi-compass', to: '/explore' },
+      { title: 'Liked', icon: 'mdi-thumb-up', to: '/liked' },
+      { title: 'History', icon: 'mdi-clipboard-text-clock', to: '/history' },
     ]
   }),
   computed: {}

@@ -17,12 +17,7 @@
         return error({
           message: err.message
         })
-        // return error({
-        //   statusCode: response.status,
-        //   message: response.data.message
-        // })
       }
-
     },
     head: {
       title: 'Home'
