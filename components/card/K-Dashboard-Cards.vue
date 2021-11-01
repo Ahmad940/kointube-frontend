@@ -51,12 +51,6 @@ export default {
       videoLength: '0',
       viewsLength: '0',
       loading: false,
-      deleteDialog: false,
-      headers: [
-        { text: 'Title', value: 'title' },
-        { text: 'Thumbnail', value: 'thumbnailUrl' },
-        { text: 'Actions', value: 'actions', sortable: false }
-      ]
     }
   },
   async fetch() {

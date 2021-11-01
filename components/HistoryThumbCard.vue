@@ -9,7 +9,7 @@
       </span>
 
       <v-spacer />
-      <v-icon @click.prevent="$emit('deleteVideo', video)">mdi-close</v-icon>
+      <v-icon @click.prevent="$emit('deleteVideo', video.id)">mdi-close</v-icon>
 
     </v-card-title>
     <v-card-subtitle>{{ $dayjs(video.createdAt).fromNow() }}</v-card-subtitle>

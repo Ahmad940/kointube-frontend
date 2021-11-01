@@ -66,6 +66,7 @@ export default {
     miniVariant: false,
     items: [
       { title: 'Dashboard', icon: 'mdi-view-dashboard', to: '/studio/dashboard' },
+      { title: 'Wallet', icon: 'mdi-card-account-details', to: '/studio/wallet' },
       { title: 'Content', icon: 'mdi-card-account-details', to: '/studio/content' },
       { title: 'Upload', icon: 'mdi-account-details', to: '/studio/upload' },
     ]

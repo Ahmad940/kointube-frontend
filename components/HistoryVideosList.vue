@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { Notify } from 'notiflix'
 import HistoryThumbCard from './HistoryThumbCard'
 
 export default {
@@ -26,10 +27,22 @@ export default {
     }
   },
   methods: {
-    deleteVideo(videoid) {
-      // eslint-disable-next-line no-console
-      console.log('video', videoid)
-      // this.mutableVideos = this.mutableVideos.filter((video) => video.id !== videoid)
+    async deleteVideo(videoid) {
+      try {
+        await this.$axios.$delete(`/history/${videoid}`)
+        this.mutableVideos = this.mutableVideos.filter((history) => history.video.id !== videoid)
+        Notify.success('video removed successfully', {
+          position: 'right-bottom',
+          timeout: 2000,
+        })
+      } catch ({ response }) {
+        // eslint-disable-next-line no-console
+        console.log('response', response.data.message)
+        Notify.failure('Unable to remove item', {
+          position: 'right-bottom',
+          timeout: 2000,
+        })
+      }
     }
   }
 }
