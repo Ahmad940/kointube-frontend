@@ -1,41 +1,30 @@
 <template>
   <div>
-    <v-container class="mb-5">
-      <div>
-        <div><v-text-field outlined dense append-icon="" /></div>
-        <div class="flex-grow-0">
-          <v-btn color="primary">Add Comment</v-btn>
-        </div>
-      </div>
-    </v-container>
     <div>
       <div class="d-flex flex-column">
         <v-row align="start" justify="start">
           <v-col class="flex-grow-0">
-            <v-avatar color="red" size="40" />
+            <v-avatar color="red" size="40">
+              <img :src="comment.user.profile_img" alt="John" />
+            </v-avatar>
           </v-col>
           <v-col>
             <p class="mb-0">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius aut
-              unde error? Saepe, magni ab! Incidunt voluptates fuga ad quae
-              asperiores laboriosam voluptate sunt esse error dolorem
+              {{ comment.content }}
             </p>
-            <small>by username 1 hr ago</small>
-
-            <div class="mt-5 ml-5">
-              <h4 class="my-5">Replies</h4>
-
-              <p class="mb-0">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero,
-                provident?
-              </p>
-              <small>by username 2, 30min ago</small>
-
-              <div align="start" justify="start" class="mt-5">
-                <div><v-text-field outlined dense /></div>
-                <div class="flex-grow-0">
-                  <v-btn color="primary">reply</v-btn>
-                </div>
+            <small
+              >by {{ comment.user.username }} -
+              {{ $dayjs(comment.createdAt).fromNow() }}</small
+            >
+            <div align="start" justify="start" class="mt-5">
+              <div><v-text-field v-model="replyContent" outlined dense /></div>
+            </div>
+            <div class="flex-grow-0">
+              <v-btn color="primary" @click="makeReply">reply</v-btn>
+            </div>
+            <div>
+              <div v-for="reply in replies" :key="reply.id" class="mt-5 ml-5">
+                <reply-card :reply="reply" />
               </div>
             </div>
           </v-col>
@@ -45,7 +34,43 @@
   </div>
 </template>
 <script>
+import { Report } from 'notiflix'
+import ReplyCard from './ReplyCard.vue'
+
 export default {
   name: 'Comments',
+  components: { ReplyCard },
+  props: {
+    comment: {
+      required: true,
+      type: Object,
+    },
+  },
+  data() {
+    return {
+      replies: [],
+      replyContent: '',
+    }
+  },
+  async fetch() {
+    const replyData = await this.$axios.$get(
+      `/video/action/reply/${this.comment.id}`
+    )
+    this.replies = replyData
+  },
+
+  methods: {
+    async makeReply() {
+      try {
+        console.log('reply content', this.replyContent)
+        await this.$axios.$post('/video/action/reply', {
+          content: this.replyContent,
+          commentid: this.comment.id,
+        })
+      } catch (error) {
+        Report.failure('Error')
+      }
+    },
+  },
 }
 </script>
